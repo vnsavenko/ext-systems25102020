@@ -8,6 +8,16 @@ public class PersonRequest
     private String givenName;
     private String patronymic;
     private LocalDate dateOfBirth;
+
+    public int getStreetCode() {
+        return streetCode;
+    }
+
+    public void setStreetCode(int streetCode) {
+        this.streetCode = streetCode;
+    }
+
+    private int streetCode;
     private String building;
     private String extension;
     private String apartment;
