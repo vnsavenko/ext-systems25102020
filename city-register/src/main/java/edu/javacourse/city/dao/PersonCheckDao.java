@@ -10,17 +10,17 @@ import java.sql.*;
 public class PersonCheckDao
 {
 
-    private static final String SQL_REQUEST = "select temporal from cr_address_person ap\n" +
-            "inner join cr_person p on p.person_id = ap.person_id\n" +
-            "inner join cr_address a on a.address_id = ap.address_id\n" +
-            "where\n" +
-            "CURRENT_DATE >= ap.start_date and (CURRENT_DATE <= ap.end_date or ap.end_date is null) \n" +
-            "and p.sur_name = ?\n" +
-            "and p.given_name = ? \n" +
-            "and p.patronymic = ? \n" +
-            "and p.date_of_birth = ?\n" +
-            "and a.street_code = ? \n" +
-            "and a.building = ? \n"
+    private static final String SQL_REQUEST = "select temporal from cr_address_person ap " +
+            "inner join cr_person p on p.person_id = ap.person_id " +
+            "inner join cr_address a on a.address_id = ap.address_id " +
+            "where " +
+            "CURRENT_DATE >= ap.start_date and (CURRENT_DATE <= ap.end_date or ap.end_date is null)  " +
+            "and p.sur_name = ? " +
+            "and p.given_name = ?  " +
+            "and p.patronymic = ?  " +
+            "and p.date_of_birth = ? " +
+            "and a.street_code = ?  " +
+            "and a.building = ?  "
             ;
 
     PersonResponse checkPerson(PersonRequest request) throws PersonCheckExeption
@@ -30,7 +30,7 @@ public class PersonCheckDao
         String sql = SQL_REQUEST;
 
         if (request.getExtension() != null) {
-            sql += "and a.extension = ? \n";
+            sql += "and a.extension = ?  ";
         } else {
             sql += "and a.extension is null ";
         }
