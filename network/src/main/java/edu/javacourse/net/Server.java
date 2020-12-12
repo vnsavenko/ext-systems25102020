@@ -7,7 +7,7 @@ import java.net.Socket;
 public class Server
 {
     public static void main(String[] args) throws IOException, InterruptedException {
-        ServerSocket socket = new ServerSocket(25225, 2000);
+        ServerSocket socket = new ServerSocket(25226, 2000);
 
         System.out.println("Server is started");
 
@@ -40,13 +40,19 @@ class SimpleServer extends Thread {
             BufferedReader br = new BufferedReader(new InputStreamReader(client.getInputStream()));
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
 
-            StringBuilder sb = new StringBuilder("Hello, ");
-            String userName = br.readLine();
-            System.out.println("Server got string: " + userName);
-            Thread.sleep(2000);
 
-            sb.append(userName);
-            bw.write(sb.toString());
+            String request = br.readLine();
+            String[] lines = request.split("\\s+");
+            String userName = lines[1];
+            String command = lines[0];
+            System.out.println("Server got string1: " + command);
+            System.out.println("Server got string2: " + userName);
+            //Thread.sleep(2000);
+
+//            StringBuilder sb = new StringBuilder("Hello, ");
+
+            String response = buildResponse(command, userName);
+            bw.write(response);
             bw.newLine();
             bw.flush();
 
@@ -60,4 +66,15 @@ class SimpleServer extends Thread {
         }
     }
 
+    private String buildResponse(String command, String userName) {
+
+        switch (command){
+            case "HELLO" : return "Hello, " + userName;
+            case "MORNING" : return "Good morning, " + userName;
+            case "DAY" : return "Good day, " + userName;
+            case "EVENING" : return "Good evening, " + userName;
+            default: return "Hi, " + userName;
+        }
+
+    }
 }
