@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 public class Client
 {
     public static void main(String[] args) throws IOException {
-        for (int i = 0; i < 5 ; i++) {
+        for (int i = 0; i < 10 ; i++) {
             SimpleClient simpleClient = new SimpleClient(i);
             simpleClient.start();
         }
