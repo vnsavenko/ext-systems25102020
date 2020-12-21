@@ -23,7 +23,17 @@ public class PersonCheckDao
             "and a.building = ?  "
             ;
 
-    PersonResponse checkPerson(PersonRequest request) throws PersonCheckExeption
+    private ConnectionBuilder connectionBuilder;
+
+    public void setConnectionBuilder(ConnectionBuilder connectionBuilder) {
+        this.connectionBuilder = connectionBuilder;
+    }
+
+    private Connection getConnection() throws SQLException {
+        return connectionBuilder.getConnection();
+    }
+
+    public PersonResponse checkPerson(PersonRequest request) throws PersonCheckExeption
     {
         PersonResponse response = new PersonResponse();
 
@@ -73,12 +83,11 @@ public class PersonCheckDao
         return response;
     }
 
-    private Connection getConnection() throws SQLException {
-        return DriverManager.getConnection("jdbc:postgresql://localhost/city_register",
-                "postgres", "postgres");
-    }
+
 }
 
 
 //jdbc:postgresql://localhost:5432/jc_student
 //jdbc:postgresql://localhost:5432/jc_student
+//DriverManager.getConnection("jdbc:postgresql://localhost/city_register",
+//        "postgres", "postgres");
